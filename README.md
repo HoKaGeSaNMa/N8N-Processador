@@ -1,7 +1,5 @@
 # N8N-Processador
 
-# N8N-Processador
-
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 ![License](https://img.shields.io/badge/license-MIT-green)
