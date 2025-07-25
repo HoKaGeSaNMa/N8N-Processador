@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 # Função para salvar DataFrame com formatação específica usando xlsxwriter
 
