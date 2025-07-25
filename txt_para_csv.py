@@ -3,16 +3,19 @@ import sys
 import pandas as pd
 import chardet
 
+
 def detectar_codificacao(path):
     with open(path, "rb") as f:
         data = f.read()
     return chardet.detect(data)["encoding"]
 
+
 def main(txt_path):
     enc = detectar_codificacao(txt_path)
 
     # Leitura direta do TXT original
-    df = pd.read_csv(txt_path, sep='|', encoding=enc, dtype=str, keep_default_na=False, engine="python")
+    df = pd.read_csv(txt_path, sep='|', encoding=enc, dtype=str,
+                     keep_default_na=False, engine="python")
 
     # Salva o CSV corretamente
     csv_path = os.path.splitext(txt_path)[0] + ".csv"
@@ -20,6 +23,7 @@ def main(txt_path):
 
     print(f"✅ CSV gerado com sucesso: {csv_path}")
     sys.exit(0)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

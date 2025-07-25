@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 
 # Função para salvar DataFrame com formatação específica usando xlsxwriter
+
+
 def salvar_com_formatacao_xlsxwriter(df, caminho_saida, formatos):
     # Ajuste de tipos antes de gravar
     for col, tipo in formatos.items():
@@ -13,14 +15,17 @@ def salvar_com_formatacao_xlsxwriter(df, caminho_saida, formatos):
 
         elif tipo == "CODIGO NUMERICO":
             # Solução robusta: converte para float primeiro, depois Int64
-            df[col] = pd.to_numeric(df[col], errors="coerce").round(0).astype("Int64")
+            df[col] = pd.to_numeric(
+                df[col], errors="coerce").round(0).astype("Int64")
 
         elif tipo == "DATA DD/MM/AAAA":
-            df[col] = pd.to_datetime(df[col], format='%d/%m/%Y', dayfirst=True, errors="coerce")
+            df[col] = pd.to_datetime(
+                df[col], format='%d/%m/%Y', dayfirst=True, errors="coerce")
 
         elif tipo == "DATA ANO NUMERICO":
             # Solução robusta também aqui:
-            df[col] = pd.to_numeric(df[col], errors="coerce").round(0).astype("Int64")
+            df[col] = pd.to_numeric(
+                df[col], errors="coerce").round(0).astype("Int64")
 
         elif tipo in ("CODIGO ALFA-NUMERICO", "DESCRICAO", "DATA MES LITERAL"):
             df[col] = df[col].astype(str)

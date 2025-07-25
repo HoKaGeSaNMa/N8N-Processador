@@ -1,6 +1,7 @@
 import pandas as pd
 import difflib
 
+
 def transformar_dataframe(df_entrada: pd.DataFrame, mapeamento: dict) -> pd.DataFrame:
     lookup = {col.strip().lower(): col for col in df_entrada.columns}
     keys = list(lookup.keys())
@@ -22,4 +23,3 @@ def transformar_dataframe(df_entrada: pd.DataFrame, mapeamento: dict) -> pd.Data
         # Default: coluna vazia
         dados[destino] = [""] * len(df_entrada)
     return pd.DataFrame(dados)
-

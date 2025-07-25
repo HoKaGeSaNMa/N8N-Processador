@@ -1,6 +1,7 @@
 import pandas as pd
 import xlsxwriter
 
+
 def salvar_com_formatacao_txt(df, caminho_saida, formatos):
     with pd.ExcelWriter(caminho_saida, engine='xlsxwriter') as writer:
         df.to_excel(writer, index=False, sheet_name='Dados')

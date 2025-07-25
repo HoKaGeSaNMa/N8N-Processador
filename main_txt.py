@@ -6,14 +6,16 @@ from processador_txt import transformar_dataframe
 from formatador_xlsxwriter import salvar_com_formatacao_xlsxwriter
 import chardet
 
+
 def detectar_codificacao(path):
     with open(path, "rb") as f:
         return chardet.detect(f.read())["encoding"]
 
+
 def ler_txt_explicitamente(path, encoding):
     with open(path, 'r', encoding=encoding) as file:
         linhas = file.readlines()
-    
+
     # Extrair o cabeçalho de maneira extremamente explícita
     header = linhas[0].strip().split('|')
     linhas_dados = linhas[1:]
@@ -26,6 +28,7 @@ def ler_txt_explicitamente(path, encoding):
         dados.append(valores[:len(header)])  # Garante tamanho exato
 
     return pd.DataFrame(dados, columns=header)
+
 
 def main(path_txt, path_out, map_file):
     encoding = detectar_codificacao(path_txt)
@@ -42,7 +45,9 @@ def main(path_txt, path_out, map_file):
 
     salvar_com_formatacao_xlsxwriter(df_saida, path_out, formatos)
 
-    print(f"✅ Concluído com sucesso: {os.path.basename(path_txt)} → {os.path.basename(path_out)}")
+    print(
+        f"✅ Concluído com sucesso: {os.path.basename(path_txt)} → {os.path.basename(path_out)}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:

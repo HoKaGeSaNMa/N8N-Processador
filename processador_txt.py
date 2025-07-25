@@ -1,10 +1,11 @@
 import pandas as pd
 import difflib
 
+
 def transformar_dataframe(df_entrada: pd.DataFrame, mapeamento: dict) -> pd.DataFrame:
     lookup = {col.strip().lower(): col for col in df_entrada.columns}
     keys = list(lookup.keys())
-    
+
     dados = {}
     for destino, origem in mapeamento.items():
         if origem:
@@ -14,7 +15,8 @@ def transformar_dataframe(df_entrada: pd.DataFrame, mapeamento: dict) -> pd.Data
             if "&&" in key:
                 parts = [p.strip() for p in origem.split("&&")]
                 series = [_match_fuzzy(df_entrada, lookup, p) for p in parts]
-                dados[destino] = series[0].astype(str).str.strip() + " " + series[1].astype(str).str.strip()
+                dados[destino] = series[0].astype(str).str.strip(
+                ) + " " + series[1].astype(str).str.strip()
                 continue
 
             # Match exato
@@ -35,6 +37,7 @@ def transformar_dataframe(df_entrada: pd.DataFrame, mapeamento: dict) -> pd.Data
     # Garante rigorosamente a ordem do mapeamento original
     df_final = pd.DataFrame({col: dados[col] for col in mapeamento.keys()})
     return df_final
+
 
 def _match_fuzzy(df, lookup, origem):
     key = origem.strip().lower()
