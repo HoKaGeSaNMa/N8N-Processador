@@ -22,11 +22,7 @@ def main(path_in, path_out, map_file):
 
     # 3) Transformação pura
     df_saida = transformar_dataframe(df_input, mapeamento)
-
-    # TESTE: salvar sem formatação
-    df_saida.to_excel("Coplacana_Original_Formatado_SIMPLES.xlsx", index=False)
-    print("Arquivo simples salvo.")
-
+    
     # 4) Gravação com formatação XlsxWriter
     salvar_com_formatacao_xlsxwriter(df_saida, path_out, formatos)
 
