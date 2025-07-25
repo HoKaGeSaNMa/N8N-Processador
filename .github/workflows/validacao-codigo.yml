@@ -1,0 +1,24 @@
+name: Validação do Código
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar repositório
+      uses: actions/checkout@v3
+
+    - name: Configurar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Instalar dependências
+      run: |
+        pip install flake8
+
+    - name: Verificar estilo com flake8
+      run: |
+        flake8 . --max-line-length=120 --exclude=__pycache__,.github
